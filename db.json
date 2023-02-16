@@ -2,8 +2,13 @@
   "users": [
     {
       "id": 1,
-      "name": "username",
+      "name": "pedro",
       "password": "123"
+    },
+    {
+      "name": "paula",
+      "password": "456",
+      "id": 2
     }
   ],
   "posts": [
