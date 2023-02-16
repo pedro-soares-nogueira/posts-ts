@@ -2,13 +2,13 @@
   "users": [
     {
       "id": 1,
-      "name": "pedro",
+      "name": "Pedro Soares",
       "password": "123",
       "avatarUrl": "https://github.com/ngrpedro.png",
       "role": "CEO"
     },
     {
-      "name": "mayk",
+      "name": "Mayk Brito",
       "password": "456",
       "id": 2,
       "avatarUrl": "https://github.com/maykbrito.png",
@@ -26,6 +26,12 @@
       "title": "How can I...",
       "content": "Velit dolore ea adipisicing voluptate eiusmod duis incididunt id id deserunt mollit laboris laboris. Lorem dolore consectetur Lorem eu adipisicing occaecat non et ad in ipsum Lorem ea eiusmod. Sit pariatur mollit officia do dolore tempor duis ut reprehenderit irure est.",
       "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "May we have...",
+      "content": "Ut minim aliquip sint velit officia est tempor. Lorem et Lorem pariatur qui ea incididunt id sunt quis commodo. Exercitation eu qui non eiusmod nostrud qui dolore nulla sunt. Non minim aliqua fugiat qui consequat.",
+      "userId": 2
     }
   ],
   "comments": [

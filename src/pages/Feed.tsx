@@ -1,7 +1,7 @@
 import Header from '../components/Header'
 import Post from '../components/Post'
 import SideBar from '../components/SideBar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChangeEvent } from 'react'
 
 const posts = [
@@ -50,14 +50,31 @@ const posts = [
   },
 ]
 
+interface Posts {
+  id: number
+  title: string
+  content: string
+  userId: number
+}
+;[]
+
 const Feed = () => {
   const [newPost, setNewPost] = useState('')
+  const [posts, setPosts] = useState<Posts[]>([])
 
   const isNewPostEmpty = newPost.length === 0
 
   const handleNewPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setNewPost(event.target.value)
   }
+
+  useEffect(() => {
+    fetch('http://localhost:3000/posts')
+      .then((res) => res.json())
+      .then((res) => setPosts(res))
+
+    return () => {}
+  }, [])
 
   return (
     <>
@@ -66,7 +83,7 @@ const Feed = () => {
         <div className='sticky top-8'>
           <SideBar />
         </div>
-        <div className='md:col-span-2 space-y-8'>
+        <div className='md:col-span-2 space-y-8 mb-20'>
           {/* new post */}
           <div className='bg-zinc-800 rounded-md p-6 space-y-4'>
             <h1 className='text-lg font-bold'>Inicie uma publicação</h1>
@@ -92,7 +109,7 @@ const Feed = () => {
             </button>
           </div>
           {posts.map((post) => (
-            <Post key={post.id} />
+            <Post key={post.id} {...post} />
           ))}
         </div>
       </div>

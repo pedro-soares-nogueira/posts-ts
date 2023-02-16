@@ -21,7 +21,6 @@ const Register = () => {
     })
       .then((res) => {
         toast.success('Usuário Regristado')
-        console.log(res)
       })
       .catch((err) => {
         toast.error('Failed :' + err.message)
@@ -31,7 +30,10 @@ const Register = () => {
   return (
     <>
       <div className='h-screen w-full flex items-center justify-center'>
-        <form onSubmit={handleSubmit} className='bg-zinc-800 rounded-md p-6 max-w-[27rem] mx-4'>
+        <form
+          onSubmit={handleSubmit}
+          className='bg-zinc-800 rounded-md p-6 max-w-[27rem] mx-4'
+        >
           <div className='mb-10'>
             <h1 className='font-semibold text-2xl'>
               Faça seu cadastro na plataforma!!
