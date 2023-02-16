@@ -125,7 +125,7 @@ const Post = ({ author, content, publishedAt }: PostProps) => {
           name="comment"
           onChange={handleNewCommentChange}
           value={newCommentText}
-          placeholder="Coloqueu seu comentário"
+          placeholder="Coloque seu comentário"
           required
           className="bg-zinc-900 rounded-md border border-gray-600 p-4 font-semibold 
             w-full outline-none focus:border-green-400 transition-all"

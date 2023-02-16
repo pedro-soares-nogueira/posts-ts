@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "username",
+      "password": "123"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "How can I...",
+      "userId": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "Did you try....?",
+      "postId": 1
+    }
+  ]
+}
