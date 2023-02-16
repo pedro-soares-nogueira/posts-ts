@@ -1,6 +1,8 @@
 import Header from '../components/Header'
 import Post from '../components/Post'
 import SideBar from '../components/SideBar'
+import { useState } from 'react'
+import { ChangeEvent } from 'react'
 
 const posts = [
   {
@@ -49,6 +51,14 @@ const posts = [
 ]
 
 const Feed = () => {
+  const [newPost, setNewPost] = useState('')
+
+  const isNewPostEmpty = newPost.length === 0
+
+  const handleNewPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setNewPost(event.target.value)
+  }
+
   return (
     <>
       <Header />
@@ -57,6 +67,29 @@ const Feed = () => {
           <SideBar />
         </div>
         <div className='md:col-span-2 space-y-8'>
+          <div className='bg-zinc-800 rounded-md p-6 space-y-4'>
+            <h1 className='text-lg font-bold'>Inicie uma publicação</h1>
+            <textarea
+              cols={30}
+              rows={4}
+              name='post'
+              onChange={handleNewPostChange}
+              value={newPost}
+              required
+              className='bg-zinc-900 rounded-md border border-gray-600 p-4 font-semibold 
+                         w-full outline-none focus:border-green-400 transition-all'
+            ></textarea>
+
+            <button
+              type='submit'
+              title=''
+              className='py-3 px-4 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
+            transition-all disabled:opacity-25'
+              disabled={isNewPostEmpty}
+            >
+              Publicar
+            </button>
+          </div>
           {posts.map((post) => (
             <Post
               key={post.id}

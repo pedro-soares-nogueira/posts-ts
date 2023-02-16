@@ -3,18 +3,28 @@
     {
       "id": 1,
       "name": "pedro",
-      "password": "123"
+      "password": "123",
+      "avatarUrl": "https://github.com/ngrpedro.png",
+      "role": "CEO"
+    },
+    {
+      "name": "mayk",
+      "password": "456",
+      "id": 2,
+      "avatarUrl": "https://github.com/maykbrito.png",
+      "role": "Tech Lead"
     },
     {
       "name": "paula",
-      "password": "456",
-      "id": 2
+      "password": "123",
+      "id": 3
     }
   ],
   "posts": [
     {
       "id": 1,
       "title": "How can I...",
+      "content": "Velit dolore ea adipisicing voluptate eiusmod duis incididunt id id deserunt mollit laboris laboris. Lorem dolore consectetur Lorem eu adipisicing occaecat non et ad in ipsum Lorem ea eiusmod. Sit pariatur mollit officia do dolore tempor duis ut reprehenderit irure est.",
       "userId": 1
     }
   ],
@@ -22,7 +32,9 @@
     {
       "id": 1,
       "body": "Did you try....?",
-      "postId": 1
+      "content": "Dolore qui cillum ullamco labore do minim. Anim ut nulla proident anim sunt elit proident incididunt officia eiusmod. Est ullamco aliqua est aliquip pariatur irure tempor duis reprehenderit nulla fugiat ea exercitation non.",
+      "postId": 1,
+      "userId": 2
     }
   ]
 }
