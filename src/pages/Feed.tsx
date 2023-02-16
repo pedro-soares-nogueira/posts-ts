@@ -67,6 +67,7 @@ const Feed = () => {
           <SideBar />
         </div>
         <div className='md:col-span-2 space-y-8'>
+          {/* new post */}
           <div className='bg-zinc-800 rounded-md p-6 space-y-4'>
             <h1 className='text-lg font-bold'>Inicie uma publicação</h1>
             <textarea
@@ -91,12 +92,7 @@ const Feed = () => {
             </button>
           </div>
           {posts.map((post) => (
-            <Post
-              key={post.id}
-              author={post.author}
-              content={post.content}
-              publishedAt={post.publishedAt}
-            />
+            <Post key={post.id} />
           ))}
         </div>
       </div>
