@@ -11,7 +11,7 @@ interface PostsContextType {
   createComment: (data: CreateCommentInput) => Promise<void>
   deleteComment: (id: number) => Promise<void>
   deletePost: (id: number) => Promise<void>
-  editPost: (id: number) => Promise<void>
+  editPost: (data: EditPostInput) => Promise<void>
 }
 
 interface PostsProviderProps {
@@ -21,6 +21,13 @@ interface PostsProviderProps {
 interface CreatePostInput {
   title: string
   content: string
+}
+
+interface EditPostInput {
+  id: number
+  title: string
+  content: string
+  userId: number | undefined
 }
 
 interface CreateCommentInput {
@@ -98,14 +105,22 @@ export function PostsProvider({ children }: PostsProviderProps) {
     setPosts(postWithoutDeletedOne)
   }
 
-  const editPost = async (id: number) => {
-    console.log(id)
-    /*     const response = await api.put(`posts/${id}`)
+  const editPost = async ({ id, title, content }: EditPostInput) => {
+    const response = await api.put(`posts/${id}`, {
+      title,
+      content,
+      userId,
+    })
 
-    const postWithoutDeletedOne = posts.filter((post) => {
+    const newArray = posts.filter((post) => {
       return post.id !== id
     })
-    setPosts(postWithoutDeletedOne) */
+
+    console.log(newArray)
+
+    setPosts((state) => [response.data, ...newArray])
+
+    console.log(response.data)
   }
 
   useEffect(() => {

@@ -31,7 +31,7 @@ const newCommentSchema = z.object({
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
 const Post = ({ id, title, content, userId }: IPosts) => {
-  const { createComment, comments, deleteComment, deletePost, editPost } =
+  const { createComment, comments, deleteComment, deletePost } =
     useContext(PostsContext)
   const [user, setUser] = useState<UserProps[]>([])
 
@@ -65,10 +65,6 @@ const Post = ({ id, title, content, userId }: IPosts) => {
     deletePost(id)
   }
 
-  const hadleEditPost = (id: number) => {
-    editPost(id)
-  }
-
   return (
     <article className='bg-zinc-800 rounded-md p-6 space-y-5'>
       <div className='flex items-center justify-between'>
@@ -99,7 +95,7 @@ const Post = ({ id, title, content, userId }: IPosts) => {
               />
             </Dialog.Trigger>
 
-            <NewPost id={id} title={title} content={content} />
+            <NewPost id={id} title={title} content={content} userId={userId} />
           </Dialog.Root>
           <button
             onClick={() => hadleDeletePost(id)}

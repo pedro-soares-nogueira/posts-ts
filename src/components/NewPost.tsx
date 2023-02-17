@@ -9,19 +9,22 @@ interface Posts {
   id?: number
   title?: string
   content?: string
+  userId?: number | undefined
 }
 
 const newPostFormSchema = z.object({
+  id: z.number(),
   title: z.string(),
   content: z.string(),
 })
 
 type NewPostFormInputs = z.infer<typeof newPostFormSchema>
 
-const NewPost = ({ id, title, content }: Posts) => {
-  const { createPost } = useContext(PostsContext)
+const NewPost = ({ id, title, content, userId }: Posts) => {
+  const postId = id
+  const { createPost, editPost } = useContext(PostsContext)
 
-  console.log(title, content)
+  const isNewPost = id === undefined
 
   const { register, handleSubmit, reset } = useForm<NewPostFormInputs>({
     defaultValues: {
@@ -30,14 +33,26 @@ const NewPost = ({ id, title, content }: Posts) => {
     },
   })
 
-  const handleCreateNewPost = async (data: NewPostFormInputs) => {
+  const onSubmitPost = async (data: NewPostFormInputs) => {
     const { content, title } = data
 
-    await createPost({
-      title,
-      content,
-    })
+    if (isNewPost) {
+      await createPost({
+        title,
+        content,
+      })
+    } else {
+      if (!postId) {
+        throw new Error('Ops!')
+      }
 
+      await editPost({
+        id: postId,
+        title,
+        content,
+        userId,
+      })
+    }
     reset()
   }
 
@@ -56,7 +71,7 @@ const NewPost = ({ id, title, content }: Posts) => {
         >
           <div className='flex items-center justify-between px-6 pt-6'>
             <Dialog.Title className='text-2xl font-bold'>
-              Nova postagem
+              {isNewPost ? 'Nova postagem' : 'Editar Postagem'}
             </Dialog.Title>
 
             <Dialog.Close>
@@ -65,7 +80,7 @@ const NewPost = ({ id, title, content }: Posts) => {
           </div>
 
           <form
-            onSubmit={handleSubmit(handleCreateNewPost)}
+            onSubmit={handleSubmit(onSubmitPost)}
             className=' rounded-md p-6 space-y-4'
           >
             <input
@@ -92,7 +107,7 @@ const NewPost = ({ id, title, content }: Posts) => {
               className='py-3 px-4 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
                             transition-all disabled:opacity-25'
             >
-              Publicar
+              {isNewPost ? 'Publicar' : 'Editar'}
             </button>
           </form>
         </Dialog.Content>
