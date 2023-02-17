@@ -1,0 +1,40 @@
+import { createContext, ReactNode } from 'react'
+import { useState, useEffect } from 'react'
+import { api } from './../lib/axios'
+
+interface User {
+  id: number
+  name: string
+  avatarUrl: string
+  role: string
+}
+
+interface AuthContextType {
+  user: User[]
+}
+
+interface AuthProviderProps {
+  children: ReactNode
+}
+
+export const AuthContext = createContext({} as AuthContextType)
+
+export function AuthProvider({ children }: AuthProviderProps) {
+  const [user, setUser] = useState<User[]>([])
+
+  const id = sessionStorage.getItem('userId')
+
+  const loggedUser = async () => {
+    const response = await api.get(`users?id=${id}`)
+
+    setUser(response.data)
+  }
+
+  useEffect(() => {
+    loggedUser()
+  }, [])
+
+  return (
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+  )
+}

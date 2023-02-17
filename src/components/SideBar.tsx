@@ -1,7 +1,9 @@
 import { Pen } from 'phosphor-react'
 import React from 'react'
 import Avatar from './Avatar'
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
+import { PostsContext } from './../contexts/PostsContext'
+import { AuthContext } from './../contexts/AuthContext';
 
 interface UserProps {
   id: number
@@ -11,15 +13,9 @@ interface UserProps {
 }
 
 const SideBar = () => {
-  const [user, setUser] = useState<UserProps[]>([])
+  const {user} = useContext(AuthContext)
 
-  const id = sessionStorage.getItem('userId')
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/users?id=${id}`)
-      .then((res) => res.json())
-      .then((res) => setUser(res))
-  }, [id])
+  console.log(user)
 
   return (
     <div className='rounded-lg overflow-hidden bg-zinc-800'>
