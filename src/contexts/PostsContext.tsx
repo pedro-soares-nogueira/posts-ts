@@ -10,6 +10,7 @@ interface PostsContextType {
   createPost: (data: CreatePostInput) => Promise<void>
   createComment: (data: CreateCommentInput) => Promise<void>
   deleteComment: (id: number) => Promise<void>
+  deletePost: (id: number) => Promise<void>
 }
 
 interface PostsProviderProps {
@@ -31,6 +32,7 @@ export const PostsContext = createContext({} as PostsContextType)
 export function PostsProvider({ children }: PostsProviderProps) {
   const [posts, setPosts] = useState<IPosts[]>([])
   const [comments, setComments] = useState<IComments[]>([])
+  const userId = sessionStorage.getItem('userId')
 
   const fetchPosts = async () => {
     const response = await api.get('posts', {
@@ -50,6 +52,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
       title,
       content,
       createdAt: new Date(),
+      userId,
     })
 
     setPosts((state) => [response.data, ...posts])
@@ -63,7 +66,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
 
   const createComment = async (data: CreateCommentInput) => {
     const { content, postId } = data
-    const userId = sessionStorage.getItem('userId')
 
     const newComment = {
       postId,
@@ -86,6 +88,15 @@ export function PostsProvider({ children }: PostsProviderProps) {
     setComments(commentWithoutDeletedOne)
   }
 
+  const deletePost = async (id: number) => {
+    const response = await api.delete(`posts/${id}`)
+
+    const postWithoutDeletedOne = posts.filter((post) => {
+      return post.id !== id
+    })
+    setPosts(postWithoutDeletedOne)
+  }
+
   useEffect(() => {
     fetchPosts()
     fetchComments()
@@ -93,7 +104,14 @@ export function PostsProvider({ children }: PostsProviderProps) {
 
   return (
     <PostsContext.Provider
-      value={{ posts, comments, createPost, createComment, deleteComment }}
+      value={{
+        posts,
+        comments,
+        createPost,
+        createComment,
+        deleteComment,
+        deletePost,
+      }}
     >
       {children}
     </PostsContext.Provider>
