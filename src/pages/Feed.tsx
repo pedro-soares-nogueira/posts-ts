@@ -3,52 +3,9 @@ import Post from '../components/Post'
 import SideBar from '../components/SideBar'
 import { useEffect, useState } from 'react'
 import { ChangeEvent } from 'react'
-
-const posts = [
-  {
-    id: 1,
-    author: {
-      avatarUrl: 'https://github.com/maykbrito.png',
-      name: 'Mayyk Brito',
-      role: 'Educador @EcoPlural',
-    },
-    content: [
-      { type: 'paragraph', content: 'Fala galeraa 👋' },
-      {
-        type: 'paragraph',
-        content:
-          'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
-      },
-      { type: 'link', content: '👉 jane.design/doctorcare' },
-      { type: 'tag', content: 'css' },
-      { type: 'tag', content: 'html' },
-      { type: 'tag', content: 'javascript' },
-    ],
-    publishedAt: new Date('2023-01-10 15:00:31'),
-  },
-  {
-    id: 2,
-    author: {
-      avatarUrl: 'https://github.com/ngrpedro.png',
-      name: 'Pedro Soares',
-      role: 'CTO @ Eco Plural',
-    },
-    content: [
-      { type: 'paragraph', content: 'Fala pessoal 👋' },
-      {
-        type: 'paragraph',
-        content:
-          'Finalmente finalizei meu novo site/portfólio. Foi um baita desafio criar todo o design e codar na unha, mas consegui 💪🏻',
-      },
-      { type: 'paragraph', content: 'Acesse e deixe seu feedback' },
-      { type: 'link', content: '👉 devonlane.design' },
-      { type: 'tag', content: 'css' },
-      { type: 'tag', content: 'html' },
-      { type: 'tag', content: 'javascript' },
-    ],
-    publishedAt: new Date('2023-02-09 08:00:31'),
-  },
-]
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { api } from '../lib/axios'
 
 interface Posts {
   id: number
@@ -56,24 +13,42 @@ interface Posts {
   content: string
   userId: number
 }
-;[]
+
+const newPostFormSchema = z.object({
+  content: z.string(),
+})
+
+type NewPostFormInputs = z.infer<typeof newPostFormSchema>
 
 const Feed = () => {
-  const [newPost, setNewPost] = useState('')
   const [posts, setPosts] = useState<Posts[]>([])
 
-  const isNewPostEmpty = newPost.length === 0
+  const { register, handleSubmit } = useForm<NewPostFormInputs>()
 
-  const handleNewPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewPost(event.target.value)
+  const hadleCreateNewPost = async (data: NewPostFormInputs) => {
+    const { content } = data
+
+    const response = await api.post('posts', {
+      content,
+      createdAt: new Date(),
+    })
+
+    setPosts((state) => [response.data, ...posts])
+  }
+
+  const fetchPosts = async () => {
+    const response = await api.get('posts', {
+      params: {
+        _sort: 'createdAt',
+        _order: 'desc',
+      },
+    })
+
+    setPosts(response.data)
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/posts')
-      .then((res) => res.json())
-      .then((res) => setPosts(res))
-
-    return () => {}
+    fetchPosts()
   }, [])
 
   return (
@@ -85,14 +60,15 @@ const Feed = () => {
         </div>
         <div className='md:col-span-2 space-y-8 mb-20'>
           {/* new post */}
-          <div className='bg-zinc-800 rounded-md p-6 space-y-4'>
+          <form
+            onSubmit={handleSubmit(hadleCreateNewPost)}
+            className='bg-zinc-800 rounded-md p-6 space-y-4'
+          >
             <h1 className='text-lg font-bold'>Inicie uma publicação</h1>
             <textarea
               cols={30}
               rows={4}
-              name='post'
-              onChange={handleNewPostChange}
-              value={newPost}
+              {...register('content')}
               required
               className='bg-zinc-900 rounded-md border border-gray-600 p-4 font-semibold 
                          w-full outline-none focus:border-green-400 transition-all'
@@ -103,11 +79,10 @@ const Feed = () => {
               title=''
               className='py-3 px-4 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
             transition-all disabled:opacity-25'
-              disabled={isNewPostEmpty}
             >
               Publicar
             </button>
-          </div>
+          </form>
           {posts.map((post) => (
             <Post key={post.id} {...post} />
           ))}
