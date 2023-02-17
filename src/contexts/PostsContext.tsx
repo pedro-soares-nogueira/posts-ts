@@ -11,6 +11,7 @@ interface PostsContextType {
   createComment: (data: CreateCommentInput) => Promise<void>
   deleteComment: (id: number) => Promise<void>
   deletePost: (id: number) => Promise<void>
+  editPost: (id: number) => Promise<void>
 }
 
 interface PostsProviderProps {
@@ -97,6 +98,16 @@ export function PostsProvider({ children }: PostsProviderProps) {
     setPosts(postWithoutDeletedOne)
   }
 
+  const editPost = async (id: number) => {
+    console.log(id)
+    /*     const response = await api.put(`posts/${id}`)
+
+    const postWithoutDeletedOne = posts.filter((post) => {
+      return post.id !== id
+    })
+    setPosts(postWithoutDeletedOne) */
+  }
+
   useEffect(() => {
     fetchPosts()
     fetchComments()
@@ -111,6 +122,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
         createComment,
         deleteComment,
         deletePost,
+        editPost,
       }}
     >
       {children}

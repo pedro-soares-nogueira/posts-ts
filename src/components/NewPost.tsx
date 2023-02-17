@@ -5,6 +5,12 @@ import * as z from 'zod'
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
 
+interface Posts {
+  id?: number
+  title?: string
+  content?: string
+}
+
 const newPostFormSchema = z.object({
   title: z.string(),
   content: z.string(),
@@ -12,10 +18,17 @@ const newPostFormSchema = z.object({
 
 type NewPostFormInputs = z.infer<typeof newPostFormSchema>
 
-const NewPost = () => {
+const NewPost = ({ id, title, content }: Posts) => {
   const { createPost } = useContext(PostsContext)
 
-  const { register, handleSubmit, reset } = useForm<NewPostFormInputs>()
+  console.log(title, content)
+
+  const { register, handleSubmit, reset } = useForm<NewPostFormInputs>({
+    defaultValues: {
+      title,
+      content,
+    },
+  })
 
   const handleCreateNewPost = async (data: NewPostFormInputs) => {
     const { content, title } = data
@@ -27,12 +40,11 @@ const NewPost = () => {
 
     reset()
   }
+
   return (
     <>
       <Dialog.Portal>
-        <Dialog.Overlay
-          className="fixed w-screen h-screen inset-0 bg-black opacity-70"
-        />
+        <Dialog.Overlay className='fixed w-screen h-screen inset-0 bg-black opacity-70' />
         <Dialog.Content
           className='bg-zinc-800'
           style={{
@@ -40,7 +52,6 @@ const NewPost = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            //transform: "translateY(-50%)",
           }}
         >
           <div className='flex items-center justify-between px-6 pt-6'>

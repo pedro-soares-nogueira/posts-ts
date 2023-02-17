@@ -9,11 +9,13 @@ import Comment from './Comment'
 import Avatar from './Avatar'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR'
-import { Trash } from 'phosphor-react'
+import { PencilSimpleLine, Trash } from 'phosphor-react'
 import { IPosts } from '../enum/types'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { PostsContext } from '../contexts/PostsContext'
+import * as Dialog from '@radix-ui/react-dialog'
+import NewPost from './NewPost'
 
 interface UserProps {
   name: string
@@ -29,7 +31,7 @@ const newCommentSchema = z.object({
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
 const Post = ({ id, title, content, userId }: IPosts) => {
-  const { createComment, comments, deleteComment, deletePost } =
+  const { createComment, comments, deleteComment, deletePost, editPost } =
     useContext(PostsContext)
   const [user, setUser] = useState<UserProps[]>([])
 
@@ -63,6 +65,10 @@ const Post = ({ id, title, content, userId }: IPosts) => {
     deletePost(id)
   }
 
+  const hadleEditPost = (id: number) => {
+    editPost(id)
+  }
+
   return (
     <article className='bg-zinc-800 rounded-md p-6 space-y-5'>
       <div className='flex items-center justify-between'>
@@ -84,12 +90,27 @@ const Post = ({ id, title, content, userId }: IPosts) => {
             </div>
           )
         })}
-        <button onClick={() => hadleDeletePost(id)} title='Deletar comentário'>
-          <Trash
-            size={22}
-            className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
-          />
-        </button>
+        <div className='flex items-center justify-center gap-3'>
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <PencilSimpleLine
+                size={22}
+                className='text-gray-200 hover:text-green-400 transition-all cursor-pointer'
+              />
+            </Dialog.Trigger>
+
+            <NewPost id={id} title={title} content={content} />
+          </Dialog.Root>
+          <button
+            onClick={() => hadleDeletePost(id)}
+            title='Alterar comentário'
+          >
+            <Trash
+              size={22}
+              className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
+            />
+          </button>
+        </div>
       </div>
 
       <div className='space-y-5'>
