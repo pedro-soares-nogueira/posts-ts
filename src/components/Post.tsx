@@ -28,7 +28,7 @@ const newCommentSchema = z.object({
 
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
-const Post = ({ id, title, content, userId, comments }: IPosts) => {
+const Post = ({ id, title, content, userId }: IPosts) => {
   const { createComment } = useContext(PostsContext)
   const [user, setUser] = useState<UserProps[]>([])
 
@@ -100,7 +100,7 @@ const Post = ({ id, title, content, userId, comments }: IPosts) => {
         </footer>
       </form>
 
-      {comments?.map((comment) => {
+{/*       {comments?.map((comment) => {
         return (
           <div
             key={comment.id}
@@ -113,7 +113,7 @@ const Post = ({ id, title, content, userId, comments }: IPosts) => {
             />
           </div>
         )
-      })}
+      })} */}
     </article>
   )
 }
