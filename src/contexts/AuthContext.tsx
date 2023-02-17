@@ -12,6 +12,7 @@ interface User {
 interface AuthContextType {
   user: User[]
   logout: () => void
+  loggedUser: () => void
 }
 
 interface AuthProviderProps {
@@ -29,6 +30,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const response = await api.get(`users?id=${id}`)
 
     setUser(response.data)
+    console.log(response.data)
   }
 
   const logout = () => {
@@ -40,7 +42,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, logout }}>
+    <AuthContext.Provider value={{ user, logout, loggedUser }}>
       {children}
     </AuthContext.Provider>
   )

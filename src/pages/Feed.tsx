@@ -13,8 +13,8 @@ const Feed = () => {
   return (
     <>
       <Header />
-      <div className='max-w-[1100px] mx-4 lg:m-auto mt-8 lg:mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 '>
-        <div className='sticky top-8'>
+      <div className='max-w-[1000px] mx-4 lg:m-auto mt-8 lg:mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 '>
+        <div>
           <SideBar />
         </div>
         <div className='md:col-span-2 space-y-8 mb-20'>

@@ -4,6 +4,8 @@ import Avatar from './Avatar'
 import { useContext } from 'react'
 import { PostsContext } from './../contexts/PostsContext'
 import { AuthContext } from './../contexts/AuthContext'
+import { useState } from 'react'
+import { api } from '../lib/axios'
 
 interface UserProps {
   id: number
@@ -13,7 +15,17 @@ interface UserProps {
 }
 
 const SideBar = () => {
-  const { user } = useContext(AuthContext)
+  const [user, setUser] = useState<UserProps[]>([])
+  const id = sessionStorage.getItem('userId')
+
+  const fetchUser = async () => {
+    const response = await api.get(`users?id=${id}`)
+    setUser(response.data)
+  }
+
+  useEffect(() => {
+    fetchUser()
+  }, [])
 
   return (
     <div className='rounded-lg overflow-hidden bg-zinc-800'>
