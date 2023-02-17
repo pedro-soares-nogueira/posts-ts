@@ -3,12 +3,14 @@ import Comment from './Comment'
 import Avatar from './Avatar'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR'
+import { Trash } from 'phosphor-react'
 
 interface PostProps {
   id: number
   title: string
   content: string
   userId: number
+  comments: { id: number; content: string; userId: number }[]
 }
 
 interface UserProps {
@@ -17,7 +19,7 @@ interface UserProps {
   role: string
 }
 
-const Post = ({ id, title, content, userId }: PostProps) => {
+const Post = ({ id, title, content, userId, comments }: PostProps) => {
   const [user, setUser] = useState<UserProps[]>([])
 
   useEffect(() => {
@@ -25,6 +27,8 @@ const Post = ({ id, title, content, userId }: PostProps) => {
       .then((res) => res.json())
       .then((res) => setUser(res))
   }, [id])
+
+  console.log(comments)
 
   return (
     <article className='bg-zinc-800 rounded-md p-6 space-y-5'>
@@ -34,7 +38,7 @@ const Post = ({ id, title, content, userId }: PostProps) => {
             key={user.name}
             className='flex items-center justify-start gap-6'
           >
-            <Avatar src={user.avatarUrl}/>
+            <Avatar src={user.avatarUrl} />
             <div className='flex flex-col items-start justify-center'>
               <h2 className='block text-lg font-bold text-gray-200'>
                 {user.name}
@@ -48,6 +52,21 @@ const Post = ({ id, title, content, userId }: PostProps) => {
         <h2 className='block text-2xl font-bold text-gray-200'>{title}</h2>
         <span className='block text-base text-gray-300'>{content}</span>
       </div>
+
+      {comments?.map((comment) => {
+        return (
+          <div
+            key={comment.id}
+            className='bg-gray-900 rounded-lg p-4 flex items-start justify-center gap-5'
+          >
+            <p className=''>{comment.content}</p>
+            <Trash
+              size={42}
+              className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
+            />
+          </div>
+        )
+      })}
     </article>
   )
 }

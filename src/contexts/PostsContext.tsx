@@ -7,6 +7,7 @@ interface Posts {
   title: string
   content: string
   userId: number
+  comments: [id: number, content: string, userId: number]
 }
 
 interface PostsContextType {
