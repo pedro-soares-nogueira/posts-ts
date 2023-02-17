@@ -6,6 +6,7 @@ import { IPosts } from '../enum/types'
 interface PostsContextType {
   posts: IPosts[]
   createPost: (data: CreatePostInput) => Promise<void>
+  createComment: (data: CreateCommentInput) => Promise<void>
 }
 
 interface PostsProviderProps {
