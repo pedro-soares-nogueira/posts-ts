@@ -18,6 +18,11 @@ interface CreatePostInput {
   content: string
 }
 
+interface CreateCommentInput {
+  postId: number
+  content: string
+}
+
 export const PostsContext = createContext({} as PostsContextType)
 
 export function PostsProvider({ children }: PostsProviderProps) {
@@ -46,12 +51,22 @@ export function PostsProvider({ children }: PostsProviderProps) {
     setPosts((state) => [response.data, ...posts])
   }
 
+  const createComment = async (data: CreateCommentInput) => {
+    const { content, postId } = data
+
+    const newComment = {
+      postId,
+    }
+
+    console.log(newComment)
+  }
+
   useEffect(() => {
     fetchPosts()
   }, [])
 
   return (
-    <PostsContext.Provider value={{ posts, createPost }}>
+    <PostsContext.Provider value={{ posts, createPost, createComment }}>
       {children}
     </PostsContext.Provider>
   )
