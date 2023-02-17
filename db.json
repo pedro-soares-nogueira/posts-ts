@@ -59,17 +59,10 @@
     },
     {
       "postId": 2,
-      "content": "Dolore eiusmod dolore labore ut ullamco commodo esse mollit mollit veniam velit eiusmod non ut. Officia minim irure ad duis in voluptate occaecat amet occaecat",
+      "content": "Sint ea exercitation amet nisi aliquip cillum labore enim. Dolore eiusmod dolore labore ut ullamco commodo esse mollit mollit veniam velit eiusmod non ut. Officia minim irure ad duis in voluptate occaecat amet occaecat Lorem.\n\n\n",
       "userId": "1",
-      "createdAt": "2023-02-17T17:40:27.515Z",
-      "id": 3
-    },
-    {
-      "postId": 2,
-      "content": "Sint ea exercitation amet nisi aliquip cillum labore enim. Dolore eiusmod dolore labore ut ullamco commodo esse mollit mollit veniam velit eiusmod non ut. Officia minim irure ad duis in voluptate occaecat amet occaecat Lorem.",
-      "userId": "1",
-      "createdAt": "2023-02-17T17:52:42.917Z",
-      "id": 4
+      "createdAt": "2023-02-17T18:23:01.404Z",
+      "id": 9
     }
   ]
 }

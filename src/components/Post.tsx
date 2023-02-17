@@ -29,10 +29,10 @@ const newCommentSchema = z.object({
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
 const Post = ({ id, title, content, userId }: IPosts) => {
-  const { createComment, comments } = useContext(PostsContext)
+  const { createComment, comments, deleteComment } = useContext(PostsContext)
   const [user, setUser] = useState<UserProps[]>([])
 
-  const { register, handleSubmit } = useForm<NewCommnetInputs>()
+  const { register, handleSubmit, reset } = useForm<NewCommnetInputs>()
 
   useEffect(() => {
     fetch(`http://localhost:3000/users?id=${userId}`)
@@ -49,9 +49,14 @@ const Post = ({ id, title, content, userId }: IPosts) => {
     }
 
     createComment(newComment)
+    reset()
   }
 
   const filteredComments = comments.filter((comment) => comment.postId === id)
+
+  const hadleDeleteComment = (id: number) => {
+    deleteComment(id)
+  }
 
   return (
     <article className='bg-zinc-800 rounded-md p-6 space-y-5'>
@@ -109,10 +114,15 @@ const Post = ({ id, title, content, userId }: IPosts) => {
             className='bg-gray-900 rounded-lg p-4 flex items-center justify-between gap-5'
           >
             <p className='flex-1'>{comment.content}</p>
-            <Trash
-              size={22}
-              className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
-            />
+            <button
+              onClick={() => hadleDeleteComment(comment.id)}
+              title='Deletar comentário'
+            >
+              <Trash
+                size={22}
+                className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
+              />
+            </button>
           </div>
         )
       })}

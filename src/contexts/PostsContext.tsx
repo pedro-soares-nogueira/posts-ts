@@ -9,6 +9,7 @@ interface PostsContextType {
   comments: IComments[]
   createPost: (data: CreatePostInput) => Promise<void>
   createComment: (data: CreateCommentInput) => Promise<void>
+  deleteComment: (id: number) => Promise<void>
 }
 
 interface PostsProviderProps {
@@ -76,13 +77,24 @@ export function PostsProvider({ children }: PostsProviderProps) {
     setComments((state) => [response.data, ...comments])
   }
 
+  const deleteComment = async (id: number) => {
+    const response = await api.delete(`comments/${id}`)
+
+    const commentWithoutDeletedOne = comments.filter((comment) => {
+      return comment.id !== id
+    })
+    setComments(commentWithoutDeletedOne)
+  }
+
   useEffect(() => {
     fetchPosts()
     fetchComments()
   }, [])
 
   return (
-    <PostsContext.Provider value={{ posts, comments, createPost, createComment }}>
+    <PostsContext.Provider
+      value={{ posts, comments, createPost, createComment, deleteComment }}
+    >
       {children}
     </PostsContext.Provider>
   )
