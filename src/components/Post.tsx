@@ -29,7 +29,7 @@ const newCommentSchema = z.object({
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
 const Post = ({ id, title, content, userId }: IPosts) => {
-  const { createComment } = useContext(PostsContext)
+  const { createComment, comments } = useContext(PostsContext)
   const [user, setUser] = useState<UserProps[]>([])
 
   const { register, handleSubmit } = useForm<NewCommnetInputs>()
@@ -50,6 +50,8 @@ const Post = ({ id, title, content, userId }: IPosts) => {
 
     createComment(newComment)
   }
+
+  const filteredComments = comments.filter((comment) => comment.postId === id)
 
   return (
     <article className='bg-zinc-800 rounded-md p-6 space-y-5'>
@@ -100,20 +102,20 @@ const Post = ({ id, title, content, userId }: IPosts) => {
         </footer>
       </form>
 
-{/*       {comments?.map((comment) => {
+      {filteredComments?.map((comment) => {
         return (
           <div
             key={comment.id}
-            className='bg-gray-900 rounded-lg p-4 flex items-start justify-center gap-5'
+            className='bg-gray-900 rounded-lg p-4 flex items-center justify-between gap-5'
           >
-            <p className=''>{comment.content}</p>
+            <p className='flex-1'>{comment.content}</p>
             <Trash
-              size={42}
+              size={22}
               className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
             />
           </div>
         )
-      })} */}
+      })}
     </article>
   )
 }

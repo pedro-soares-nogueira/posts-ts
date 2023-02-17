@@ -6,6 +6,7 @@ import { AuthContext } from './AuthContext'
 
 interface PostsContextType {
   posts: IPosts[]
+  comments: IComments[]
   createPost: (data: CreatePostInput) => Promise<void>
   createComment: (data: CreateCommentInput) => Promise<void>
 }
@@ -81,7 +82,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
   }, [])
 
   return (
-    <PostsContext.Provider value={{ posts, createPost, createComment }}>
+    <PostsContext.Provider value={{ posts, comments, createPost, createComment }}>
       {children}
     </PostsContext.Provider>
   )
