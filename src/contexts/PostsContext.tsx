@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useEffect } from 'react'
+import { createContext, ReactNode, useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { api } from './../lib/axios'
-import { IPosts } from '../enum/types'
+import { IComments, IPosts } from '../enum/types'
+import { AuthContext } from './AuthContext'
 
 interface PostsContextType {
   posts: IPosts[]
@@ -27,6 +28,7 @@ export const PostsContext = createContext({} as PostsContextType)
 
 export function PostsProvider({ children }: PostsProviderProps) {
   const [posts, setPosts] = useState<IPosts[]>([])
+  const [comments, setComments] = useState<IComments[]>([])
 
   const fetchPosts = async () => {
     const response = await api.get('posts', {
@@ -51,18 +53,31 @@ export function PostsProvider({ children }: PostsProviderProps) {
     setPosts((state) => [response.data, ...posts])
   }
 
+  const fetchComments = async () => {
+    const response = await api.get('comments')
+
+    setComments(response.data)
+  }
+
   const createComment = async (data: CreateCommentInput) => {
     const { content, postId } = data
+    const userId = sessionStorage.getItem('userId')
 
     const newComment = {
       postId,
+      content,
+      userId,
+      createdAt: new Date(),
     }
 
-    console.log(newComment)
+    const response = await api.post('comments', newComment)
+
+    setComments((state) => [response.data, ...comments])
   }
 
   useEffect(() => {
     fetchPosts()
+    fetchComments()
   }, [])
 
   return (

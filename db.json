@@ -34,14 +34,35 @@
       "content": "Ut minim aliquip sint velit officia est tempor. Lorem et Lorem pariatur qui ea incididunt id sunt quis commodo. Exercitation eu qui non eiusmod nostrud qui dolore nulla sunt. Non minim aliqua fugiat qui consequat.",
       "createdAt": "2023-02-16T10:39:11.273Z",
       "userId": 2
+    },
+    {
+      "title": "May we have...",
+      "content": "Velit dolore ea adipisicing voluptate eiusmod duis incididunt id id deserunt mollit laboris laboris. Lorem dolore consectetur Lorem eu adipisicing occaecat non et ad in ipsum Lorem ea eiusmod. Sit pariatur mollit officia do dolore tempor duis ut reprehenderit irure est.\n",
+      "createdAt": "2023-02-17T16:58:15.588Z",
+      "id": 3
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
+      "postId": 3,
+      "content": "dfdfdfdfdffd",
+      "userId": "1",
+      "createdAt": "2023-02-17T17:32:34.205Z",
+      "id": 1
+    },
+    {
       "postId": 1,
-      "userId": 1
+      "content": "dgs ghsfry hthhb\\vdsr gtws  ",
+      "userId": "1",
+      "createdAt": "2023-02-17T17:33:09.557Z",
+      "id": 2
+    },
+    {
+      "postId": 2,
+      "content": "if we.....",
+      "userId": "1",
+      "createdAt": "2023-02-17T17:40:27.515Z",
+      "id": 3
     }
   ]
 }
