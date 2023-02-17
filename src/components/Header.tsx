@@ -1,8 +1,12 @@
 import React from 'react'
 import logo from '../assets/logo.svg'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../contexts/AuthContext'
+import { useContext } from 'react'
 
 const Header = () => {
+  const { logout } = useContext(AuthContext)
+
   return (
     <div className='bg-zinc-800 py-3 border-b border-gray-700'>
       <div className='flex items-center justify-between max-w-[1100px] m-auto'>
@@ -14,6 +18,7 @@ const Header = () => {
         <Link
           style={{ float: 'right' }}
           to={'/'}
+          onClick={logout}
           className='py-2 px-4 flex items-center justify-center gap-2 font-bold text-green-700 border-2 
                 border-green-700 rounded-lg hover:bg-green-700 transition-all hover:text-white'
         >

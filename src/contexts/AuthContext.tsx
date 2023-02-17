@@ -11,6 +11,7 @@ interface User {
 
 interface AuthContextType {
   user: User[]
+  logout: () => void
 }
 
 interface AuthProviderProps {
@@ -30,11 +31,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(response.data)
   }
 
+  const logout = () => {
+    sessionStorage.removeItem('userId')
+  }
+
   useEffect(() => {
     loggedUser()
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, logout }}>
+      {children}
+    </AuthContext.Provider>
   )
 }

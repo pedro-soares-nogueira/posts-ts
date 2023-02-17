@@ -1,9 +1,9 @@
 import { Pen } from 'phosphor-react'
-import React from 'react'
+import { useEffect } from 'react'
 import Avatar from './Avatar'
 import { useContext } from 'react'
 import { PostsContext } from './../contexts/PostsContext'
-import { AuthContext } from './../contexts/AuthContext';
+import { AuthContext } from './../contexts/AuthContext'
 
 interface UserProps {
   id: number
@@ -13,9 +13,7 @@ interface UserProps {
 }
 
 const SideBar = () => {
-  const {user} = useContext(AuthContext)
-
-  console.log(user)
+  const { user } = useContext(AuthContext)
 
   return (
     <div className='rounded-lg overflow-hidden bg-zinc-800'>
