@@ -1,18 +1,10 @@
 import Header from '../components/Header'
 import Post from '../components/Post'
 import SideBar from '../components/SideBar'
-import { useEffect, useState } from 'react'
-import { ChangeEvent } from 'react'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import { api } from '../lib/axios'
-
-interface Posts {
-  id: number
-  title: string
-  content: string
-  userId: number
-}
+import { PostsContext } from './../contexts/PostsContext'
 
 const newPostFormSchema = z.object({
   content: z.string(),
@@ -21,35 +13,19 @@ const newPostFormSchema = z.object({
 type NewPostFormInputs = z.infer<typeof newPostFormSchema>
 
 const Feed = () => {
-  const [posts, setPosts] = useState<Posts[]>([])
+  const { posts, createPost } = useContext(PostsContext)
 
-  const { register, handleSubmit } = useForm<NewPostFormInputs>()
+  const { register, handleSubmit, reset } = useForm<NewPostFormInputs>()
 
-  const hadleCreateNewPost = async (data: NewPostFormInputs) => {
+  const handleCreateNewPost = async (data: NewPostFormInputs) => {
     const { content } = data
 
-    const response = await api.post('posts', {
+    await createPost({
       content,
-      createdAt: new Date(),
     })
 
-    setPosts((state) => [response.data, ...posts])
+    reset()
   }
-
-  const fetchPosts = async () => {
-    const response = await api.get('posts', {
-      params: {
-        _sort: 'createdAt',
-        _order: 'desc',
-      },
-    })
-
-    setPosts(response.data)
-  }
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
 
   return (
     <>
@@ -61,7 +37,7 @@ const Feed = () => {
         <div className='md:col-span-2 space-y-8 mb-20'>
           {/* new post */}
           <form
-            onSubmit={handleSubmit(hadleCreateNewPost)}
+            onSubmit={handleSubmit(handleCreateNewPost)}
             className='bg-zinc-800 rounded-md p-6 space-y-4'
           >
             <h1 className='text-lg font-bold'>Inicie uma publicação</h1>
