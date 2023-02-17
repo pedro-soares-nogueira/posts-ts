@@ -34,6 +34,17 @@
       "content": "Ut minim aliquip sint velit officia est tempor. Lorem et Lorem pariatur qui ea incididunt id sunt quis commodo. Exercitation eu qui non eiusmod nostrud qui dolore nulla sunt. Non minim aliqua fugiat qui consequat.",
       "createdAt": "2023-02-16T10:39:11.273Z",
       "userId": 2
+    },
+    {
+      "content": "teste content",
+      "createdAt": "2023-02-17T11:56:27.479Z",
+      "id": 3
+    },
+    {
+      "title": "teste title",
+      "content": "teste content",
+      "createdAt": "2023-02-17T11:56:58.347Z",
+      "id": 4
     }
   ],
   "comments": [

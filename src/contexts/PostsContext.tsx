@@ -19,6 +19,7 @@ interface PostsProviderProps {
 }
 
 interface CreatePostInput {
+  title: string
   content: string
 }
 
@@ -39,9 +40,10 @@ export function PostsProvider({ children }: PostsProviderProps) {
   }
 
   const createPost = async (data: CreatePostInput) => {
-    const { content } = data
+    const { content, title } = data
 
     const response = await api.post('posts', {
+      title,
       content,
       createdAt: new Date(),
     })
