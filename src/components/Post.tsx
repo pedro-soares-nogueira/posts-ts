@@ -4,14 +4,7 @@ import Avatar from './Avatar'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR'
 import { Trash } from 'phosphor-react'
-
-interface PostProps {
-  id: number
-  title: string
-  content: string
-  userId: number
-  comments: { id: number; content: string; userId: number }[]
-}
+import { IPosts } from '../enum/types'
 
 interface UserProps {
   name: string
@@ -19,7 +12,7 @@ interface UserProps {
   role: string
 }
 
-const Post = ({ id, title, content, userId, comments }: PostProps) => {
+const Post = ({ id, title, content, userId, comments }: IPosts) => {
   const [user, setUser] = useState<UserProps[]>([])
 
   useEffect(() => {
