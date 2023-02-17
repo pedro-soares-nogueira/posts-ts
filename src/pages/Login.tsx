@@ -22,7 +22,7 @@ const Login = () => {
         } else {
           if (res[0].password === password) {
             toast.success('Success')
-            sessionStorage.setItem('username', name)
+            sessionStorage.setItem('userId', res[0].id)
             navigate('/feed')
           } else {
             toast.error('Senha inválida')
