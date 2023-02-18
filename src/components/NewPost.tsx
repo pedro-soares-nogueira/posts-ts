@@ -43,7 +43,7 @@ const NewPost = ({ id, title, content, userId }: Posts) => {
       })
     } else {
       if (!postId) {
-        throw new Error('Ops!')
+        throw new Error('Ops, no postId!')
       }
 
       await editPost({
@@ -52,6 +52,7 @@ const NewPost = ({ id, title, content, userId }: Posts) => {
         content,
         userId,
       })
+      reset()
     }
     reset()
   }

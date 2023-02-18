@@ -12,6 +12,7 @@ interface PostsContextType {
   deleteComment: (id: number) => Promise<void>
   deletePost: (id: number) => Promise<void>
   editPost: (data: EditPostInput) => Promise<void>
+  editComment: (data: EditCommentInput) => Promise<void>
 }
 
 interface PostsProviderProps {
@@ -28,6 +29,13 @@ interface EditPostInput {
   title: string
   content: string
   userId: number | undefined
+}
+
+interface EditCommentInput {
+  id: number
+  content: string
+  postId?: number
+  userId?: number | undefined
 }
 
 interface CreateCommentInput {
@@ -116,11 +124,19 @@ export function PostsProvider({ children }: PostsProviderProps) {
       return post.id !== id
     })
 
-    console.log(newArray)
-
     setPosts((state) => [response.data, ...newArray])
+  }
 
-    console.log(response.data)
+  const editComment = async ({ id, content }: EditCommentInput) => {
+    const response = await api.patch(`comments/${id}`, {
+      content,
+    })
+
+    const newArray = comments.filter((comment) => {
+      return comment.id !== id
+    })
+
+    setComments((state) => [response.data, ...newArray])
   }
 
   useEffect(() => {
@@ -138,6 +154,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
         deleteComment,
         deletePost,
         editPost,
+        editComment,
       }}
     >
       {children}

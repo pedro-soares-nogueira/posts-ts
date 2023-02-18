@@ -16,6 +16,7 @@ import * as z from 'zod'
 import { PostsContext } from '../contexts/PostsContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import NewPost from './NewPost'
+import EditComment from './EditComment'
 
 interface UserProps {
   name: string
@@ -147,6 +148,17 @@ const Post = ({ id, title, content, userId }: IPosts) => {
             className='bg-gray-900 rounded-lg p-4 flex items-center justify-between gap-5'
           >
             <p className='flex-1'>{comment.content}</p>
+
+            <Dialog.Root>
+              <Dialog.Trigger>
+                <PencilSimpleLine
+                  size={22}
+                  className='text-gray-200 hover:text-green-400 transition-all cursor-pointer'
+                />
+              </Dialog.Trigger>
+              <EditComment id={comment.id} content={comment.content} />
+            </Dialog.Root>
+
             <button
               onClick={() => hadleDeleteComment(comment.id)}
               title='Deletar comentário'

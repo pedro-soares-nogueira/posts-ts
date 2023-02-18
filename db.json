@@ -36,8 +36,8 @@
       "userId": 2
     },
     {
-      "title": "vamo v er  ddddf   saasdf vs ",
-      "content": "veghrtjuhtyjghneageragt",
+      "title": "teste postagem ediçãoo",
+      "content": "123",
       "userId": "1",
       "id": 3
     }
@@ -49,6 +49,20 @@
       "userId": "1",
       "createdAt": "2023-02-17T18:23:01.404Z",
       "id": 9
+    },
+    {
+      "postId": 1,
+      "content": "We can try...",
+      "userId": "1",
+      "createdAt": "2023-02-17T23:31:18.325Z",
+      "id": 10
+    },
+    {
+      "postId": 3,
+      "content": "12345678910",
+      "userId": "1",
+      "createdAt": "2023-02-18T18:35:57.954Z",
+      "id": 12
     }
   ]
 }
