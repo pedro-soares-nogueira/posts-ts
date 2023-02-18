@@ -1,43 +1,50 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useContext } from 'react'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowArcRight, ArrowRight } from 'phosphor-react'
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { api } from '../lib/axios'
+import { AuthContext } from '../contexts/AuthContext'
+
+interface ILogin {
+  username: string
+  password: string
+}
+
+const loginFormSchema = z.object({
+  username: z.string(),
+  password: z.string(),
+})
+
+type LoginFormInpus = z.infer<typeof loginFormSchema>
 
 const Login = () => {
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
+  const { fetchUser } = useContext(AuthContext)
+  const { register, handleSubmit, reset } = useForm<LoginFormInpus>()
 
   const navigate = useNavigate()
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault()
+  const onSubmit = async (data: LoginFormInpus) => {
+    const user = await fetchUser(data)
 
-    fetch(`http://localhost:3000/users?name=${name}`)
-      .then((res) => {
-        return res.json()
-      })
-      .then((res) => {
-        if (Object.keys(res).length === 0) {
-          return toast.error('Usuário invalido')
-        } else {
-          if (res[0].password === password) {
-            toast.success('Success')
-            sessionStorage.setItem('userId', res[0].id)
-            navigate('/feed')
-          } else {
-            toast.error('Senha inválida')
-          }
-        }
-      })
-      .catch((err) => {
-        toast.error('Failed :' + err.message)
-      })
+    const validUsername = user.length
+
+    if (validUsername === 0) {
+      return toast.error('Usuário invalido')
+    }
+
+    if (user[0].password !== data.password) {
+      return toast.error('Senha invalida')
+    }
+
+    navigate('/feed')
   }
   return (
     <>
       <div className='h-screen w-full flex items-center justify-center'>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className='bg-zinc-800 rounded-md p-6 max-w-[27rem] w-full mx-4'
         >
           <div className='mb-10'>
@@ -49,8 +56,7 @@ const Login = () => {
           <div>
             <label>Username</label>
             <input
-              onChange={(event) => setName(event.target.value)}
-              value={name}
+              {...register('username')}
               type='text'
               className='bg-zinc-900 rounded-md border border-gray-600 p-2 mt-2 font-semibold 
                         w-full outline-none focus:border-green-400 transition-all'
@@ -60,8 +66,7 @@ const Login = () => {
           <div>
             <label>Password</label>
             <input
-              onChange={(event) => setPassword(event.target.value)}
-              value={password}
+              {...register('password')}
               type='text'
               className='bg-zinc-900 rounded-md border border-gray-600 p-2 mt-2 font-semibold 
                         w-full outline-none focus:border-green-400 transition-all'

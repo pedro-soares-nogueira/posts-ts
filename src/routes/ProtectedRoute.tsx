@@ -6,7 +6,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const user = sessionStorage.getItem('userId')
+  const user = localStorage.getItem('user-blog-dev-pedro')
 
   if (!user) {
     return <Navigate to='/' />
