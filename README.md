@@ -33,3 +33,27 @@
 - _zod_: Tipagem de formulário
 - _date-fns_: Converter datas
 - _phosphor-react_: Icones
+
+---
+
+### Step by step
+
+```sh
+git clone https://github.com/ngrpedro/posts-ts.git
+```
+
+```sh
+cd posts-ts
+```
+
+#### Start client
+
+```sh
+npm run dev
+```
+
+#### Start server
+
+```sh
+npm run server
+```
