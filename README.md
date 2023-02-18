@@ -1,5 +1,9 @@
 ## Blog - Users • Posts • Comments
 
+Plataforma de _Blog_ usando reactjs + typescript. Com TailwindCSS para gerar mais velocidade na criação do css. Utilizei o json server como api fake para gerencimaneto de banco de dados. Utilizei tambem alguns components disponibilizados pelo Radix-ui pois são componentes sem estilização que me dão total liberdade e segurança no desenvolvimento, garantindo principalmente acessibilidade e performance e por fim, pela simplicidade da aplicação, usei o contextAPI do react para gerenciar seu estado global.
+
+---
+
 #### Req. Funcionais
 
 - [x] Cadastro de usuários
@@ -19,8 +23,10 @@
 #### Regras de negócio
 
 - [x] Somente login de usuário cadastrado
+- [x] Listagem de postagens
 - [x] Listagem de comentários por postagens
 - [ ] Validaçao de campos de formulário
+- [ ] Rotas seguras
 
 #### Dependências
 
