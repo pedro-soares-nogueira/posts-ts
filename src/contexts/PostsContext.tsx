@@ -49,7 +49,13 @@ export function PostsProvider({ children }: PostsProviderProps) {
   const { user } = useContext(AuthContext)
   const [posts, setPosts] = useState<IPosts[]>([])
   const [comments, setComments] = useState<IComments[]>([])
-  const { id: userId } = user[0]
+  let userId: number
+
+  if (user.length !== 0) {
+    userId = user[0].id
+  }
+
+  console.log(user)
 
   const fetchPosts = async () => {
     const response = await api.get('posts', {
