@@ -11,3 +11,9 @@ export interface IComments {
   userId: string
   postId: number
 }
+
+export interface IUser {
+  name: string
+  avatarUrl: string
+  role: string
+}

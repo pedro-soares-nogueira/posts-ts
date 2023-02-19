@@ -5,24 +5,18 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import Comment from './Comment'
 import Avatar from './Avatar'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR'
 import { PencilSimpleLine, Trash } from 'phosphor-react'
-import { IPosts } from '../enum/types'
+import { IPosts, IUser } from '../enum/types'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { PostsContext } from '../contexts/PostsContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import NewPost from './NewPost'
 import EditComment from './EditComment'
-
-interface UserProps {
-  name: string
-  avatarUrl: string
-  role: string
-}
+import Comment from './Comment'
 
 const newCommentSchema = z.object({
   id: z.number(),
@@ -32,9 +26,8 @@ const newCommentSchema = z.object({
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
 const Post = ({ id, title, content, userId }: IPosts) => {
-  const { createComment, comments, deleteComment, deletePost } =
-    useContext(PostsContext)
-  const [user, setUser] = useState<UserProps[]>([])
+  const { createComment, comments, deletePost } = useContext(PostsContext)
+  const [user, setUser] = useState<IUser[]>([])
 
   const { register, handleSubmit, reset } = useForm<NewCommnetInputs>()
 
@@ -57,10 +50,6 @@ const Post = ({ id, title, content, userId }: IPosts) => {
   }
 
   const filteredComments = comments.filter((comment) => comment.postId === id)
-
-  const hadleDeleteComment = (id: number) => {
-    deleteComment(id)
-  }
 
   const hadleDeletePost = (id: number) => {
     deletePost(id)
@@ -143,32 +132,12 @@ const Post = ({ id, title, content, userId }: IPosts) => {
 
       {filteredComments?.map((comment) => {
         return (
-          <div
+          <Comment
             key={comment.id}
-            className='bg-gray-900 rounded-lg p-4 flex items-center justify-between gap-5'
-          >
-            <p className='flex-1'>{comment.content}</p>
-
-            <Dialog.Root>
-              <Dialog.Trigger>
-                <PencilSimpleLine
-                  size={22}
-                  className='text-gray-200 hover:text-green-400 transition-all cursor-pointer'
-                />
-              </Dialog.Trigger>
-              <EditComment id={comment.id} content={comment.content} />
-            </Dialog.Root>
-
-            <button
-              onClick={() => hadleDeleteComment(comment.id)}
-              title='Deletar comentário'
-            >
-              <Trash
-                size={22}
-                className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
-              />
-            </button>
-          </div>
+            id={comment.id}
+            content={comment.content}
+            userId={comment.userId}
+          />
         )
       })}
     </article>
