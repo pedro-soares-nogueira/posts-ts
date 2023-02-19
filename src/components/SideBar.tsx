@@ -15,17 +15,9 @@ interface UserProps {
 }
 
 const SideBar = () => {
-  const [user, setUser] = useState<UserProps[]>([])
-  const id = sessionStorage.getItem('userId')
+  const { user } = useContext(AuthContext)
 
-  const fetchUser = async () => {
-    const response = await api.get(`users?id=${id}`)
-    setUser(response.data)
-  }
-
-  useEffect(() => {
-    fetchUser()
-  }, [])
+  const { name, avatarUrl, role } = user[0]
 
   return (
     <div className='rounded-lg overflow-hidden bg-zinc-800'>
@@ -34,19 +26,16 @@ const SideBar = () => {
         src='https://images.unsplash.com/photo-1522252234503-e356532cafd5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80'
         alt=''
       />
-      {user.map((user) => {
-        return (
-          <div key={user.id}>
-            <div className='-mt-10 flex items-center justify-center'>
-              <Avatar src={user.avatarUrl} />
-            </div>
-            <div className='text-center my-5 pb-5'>
-              <h1 className='text-xl font-bold'>{user.name}</h1>
-              <span className=''>{user.role}</span>
-            </div>
-          </div>
-        )
-      })}
+
+      <div>
+        <div className='-mt-10 flex items-center justify-center'>
+          <Avatar src={avatarUrl} />
+        </div>
+        <div className='text-center my-5 pb-5'>
+          <h1 className='text-xl font-bold'>{name}</h1>
+          <span className=''>{role}</span>
+        </div>
+      </div>
 
       <div className='flex items-center justify-center py-6 border-t border-gray-500'>
         <a

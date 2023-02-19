@@ -16,7 +16,6 @@ interface User {
 interface AuthContextType {
   user: User[]
   logout: () => void
-  loggedUser: () => void
   fetchUser: (data: LoginUserInputs) => Promise<User[]>
 }
 
@@ -34,35 +33,24 @@ export const AuthContext = createContext({} as AuthContextType)
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useLocalStorage<User[]>('user-blog-dev-pedro', [])
 
-  const id = sessionStorage.getItem('userId')
-
   const fetchUser = async (data: LoginUserInputs) => {
     const { username, password } = data
 
     const response = await api.get(`users?username=${username}`)
 
-    setUser(response.data)
+    if (response.data[0].password === password) {
+      setUser(response.data)
+    }
 
     return response.data
   }
 
-  // qual usuário está logado
-  const loggedUser = async () => {
-    const response = await api.get(`users?id=${id}`)
-
-    setUser(response.data)
-  }
-
   const logout = () => {
-    sessionStorage.removeItem('userId')
+    localStorage.removeItem('user-blog-dev-pedro')
   }
-
-  useEffect(() => {
-    loggedUser()
-  }, [])
 
   return (
-    <AuthContext.Provider value={{ user, logout, loggedUser, fetchUser }}>
+    <AuthContext.Provider value={{ user, logout, fetchUser }}>
       {children}
     </AuthContext.Provider>
   )
