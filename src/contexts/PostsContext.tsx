@@ -46,9 +46,10 @@ interface CreateCommentInput {
 export const PostsContext = createContext({} as PostsContextType)
 
 export function PostsProvider({ children }: PostsProviderProps) {
+  const { user } = useContext(AuthContext)
   const [posts, setPosts] = useState<IPosts[]>([])
   const [comments, setComments] = useState<IComments[]>([])
-  const userId = sessionStorage.getItem('userId')
+  const { id: userId } = user[0]
 
   const fetchPosts = async () => {
     const response = await api.get('posts', {
