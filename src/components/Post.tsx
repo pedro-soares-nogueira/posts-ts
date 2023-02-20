@@ -88,7 +88,7 @@ const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
             <Dialog.Trigger>
               <PencilSimpleLine
                 size={22}
-                className='text-gray-200 hover:text-green-400 transition-all cursor-pointer'
+                className='text-gray-200 hover:text-purple-400 transition-all cursor-pointer'
               />
             </Dialog.Trigger>
 
@@ -122,7 +122,7 @@ const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
 
                 <div className='w-full flex items-start justify-start gap-4'>
                   <AlertDialog.Cancel
-                    className='py-3 px-4 flex items-center justify-center gap-2 font-bold text-green-700 
+                    className='py-3 px-4 flex items-center justify-center gap-2 font-bold text-purple-400 
                    rounded-lg transition-all hover:text-white'
                   >
                     Sair
@@ -131,7 +131,7 @@ const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
                     <button
                       onClick={() => hadleDeletePost(id)}
                       title='Alterar comentário'
-                      className='py-3 px-4 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
+                      className='py-3 px-4 rounded-lg font-bold bg-purple-700 text-white hover:bg-purple-600 
                                   transition-all disabled:opacity-25'
                     >
                       Excluir
@@ -160,14 +160,14 @@ const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
           required
           {...register('content')}
           className='bg-zinc-900 rounded-md border border-gray-600 p-4 font-semibold 
-            w-full outline-none focus:border-green-400 transition-all'
+            w-full outline-none focus:border-purple-400 transition-all'
         ></textarea>
 
         <footer className='invisible max-h-0 group-focus-within:visible group-focus-within:max-h-32 transition-all'>
           <button
             type='submit'
             title=''
-            className='py-4 px-6 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
+            className='py-4 px-6 rounded-lg font-bold bg-purple-700 text-white hover:bg-purple-600 
             transition-all disabled:opacity-25'
           >
             Publicar

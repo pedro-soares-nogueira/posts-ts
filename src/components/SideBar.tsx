@@ -36,17 +36,6 @@ const SideBar = () => {
           <span className=''>{role}</span>
         </div>
       </div>
-
-      <div className='flex items-center justify-center py-6 border-t border-gray-500'>
-        <a
-          href='#'
-          className='py-4 px-6 flex items-center justify-center gap-2 font-bold text-green-700 border-2 
-                border-green-700 rounded-lg hover:bg-green-700 transition-all hover:text-white'
-        >
-          <Pen size={22} />
-          Editar perfil
-        </a>
-      </div>
     </div>
   )
 }

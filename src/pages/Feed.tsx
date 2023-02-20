@@ -47,8 +47,8 @@ const Feed = () => {
         <div className='md:col-span-2 space-y-8 mb-20'>
           <Dialog.Root>
             <Dialog.Trigger
-              className='py-2 px-4 flex items-center justify-center gap-2 font-bold text-green-700 border-2 
-                border-green-700 rounded-lg hover:bg-green-700 transition-all hover:text-white'
+              className='py-2 px-4 flex items-center justify-center gap-2 font-bold text-purple-400 border-2 
+                border-purple-400 rounded-lg hover:bg-purple-400 transition-all hover:text-white'
             >
               Nova postagem
             </Dialog.Trigger>

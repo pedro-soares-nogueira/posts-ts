@@ -86,7 +86,7 @@ const Post = ({ author, content, publishedAt }: PostProps) => {
                 <p key={index}>
                   <a
                     href="#"
-                    className="text-green-700 hover:text-green-800 transition-all"
+                    className="text-purple-700 hover:text-purple-800 transition-all"
                   >
                     {item.content}
                   </a>
@@ -101,7 +101,7 @@ const Post = ({ author, content, publishedAt }: PostProps) => {
               return (
                 <span
                   key={index}
-                  className="text-green-700 hover:text-green-800 transition-all cursor-pointer"
+                  className="text-purple-700 hover:text-purple-800 transition-all cursor-pointer"
                 >
                   #{item.content}
                 </span>
@@ -128,14 +128,14 @@ const Post = ({ author, content, publishedAt }: PostProps) => {
           placeholder="Coloque seu comentário"
           required
           className="bg-zinc-900 rounded-md border border-gray-600 p-4 font-semibold 
-            w-full outline-none focus:border-green-400 transition-all"
+            w-full outline-none focus:border-purple-400 transition-all"
         ></textarea>
 
         <footer className="invisible max-h-0 group-focus-within:visible group-focus-within:max-h-32 transition-all">
           <button
             type="submit"
             title=""
-            className="py-4 px-6 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
+            className="py-4 px-6 rounded-lg font-bold bg-purple-700 text-white hover:bg-purple-600 
             transition-all disabled:opacity-25"
             disabled={isNewCommentEmpty}
           >

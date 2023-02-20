@@ -12,15 +12,14 @@ const Header = () => {
       <div className='flex items-center justify-between max-w-[1100px] m-auto'>
         <div></div>
         <div className='flex items-center justify-between gap-3'>
-          <img src={logo} alt='Logotipo' className='w-14 bg-zinc-800' />
-          <h1 className='font-bold text-2xl bg-zinc-800'>Pedro | BlogFeed</h1>
+          <h1 className='font-bold text-2xl bg-zinc-800 text-purple-400'>Pedro | BlogFeed</h1>
         </div>
         <Link
           style={{ float: 'right' }}
           to={'/'}
           onClick={logout}
-          className='py-2 px-4 flex items-center justify-center gap-2 font-bold text-green-700 border-2 
-                border-green-700 rounded-lg hover:bg-green-700 transition-all hover:text-white'
+          className='py-2 px-4 flex items-center justify-center gap-2 font-bold text-purple-400 border-2 
+                border-purple-400 rounded-lg hover:bg-purple-400 transition-all hover:text-white'
         >
           Logout
         </Link>

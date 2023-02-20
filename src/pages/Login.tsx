@@ -59,7 +59,7 @@ const Login = () => {
               {...register('username')}
               type='text'
               className='bg-zinc-900 rounded-md border border-gray-600 p-2 mt-2 font-semibold 
-                        w-full outline-none focus:border-green-400 transition-all'
+                        w-full outline-none focus:border-purple-400 transition-all'
             />
           </div>
           <br />
@@ -69,7 +69,7 @@ const Login = () => {
               {...register('password')}
               type='password'
               className='bg-zinc-900 rounded-md border border-gray-600 p-2 mt-2 font-semibold 
-                        w-full outline-none focus:border-green-400 transition-all'
+                        w-full outline-none focus:border-purple-400 transition-all'
             />
           </div>
 
@@ -78,7 +78,7 @@ const Login = () => {
           <div className='flex flex-col gap-4'>
             <button
               type='submit'
-              className='py-4 px-6 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
+              className='py-4 px-6 rounded-lg font-bold bg-purple-700 text-white hover:bg-purple-600 
             transition-all disabled:opacity-25'
             >
               Entrar

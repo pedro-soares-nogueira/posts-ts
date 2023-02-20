@@ -35,7 +35,7 @@ const Comment = ({ id, content, createdAt }: CommentProps) => {
             <Dialog.Trigger>
               <PencilSimpleLine
                 size={22}
-                className='text-gray-200 hover:text-green-400 transition-all cursor-pointer'
+                className='text-gray-200 hover:text-purple-400 transition-all cursor-pointer'
               />
             </Dialog.Trigger>
             <EditComment id={id} content={content} />
