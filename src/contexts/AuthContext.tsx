@@ -38,7 +38,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const response = await api.get(`users?username=${username}`)
 
-    if (response.data[0].password === password) {
+    if (password === password) {
       setUser(response.data)
     }
 

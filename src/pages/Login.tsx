@@ -5,6 +5,7 @@ import { ArrowArcRight, ArrowRight } from 'phosphor-react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { api } from '../lib/axios'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthContext } from '../contexts/AuthContext'
 
 interface ILogin {
@@ -13,15 +14,26 @@ interface ILogin {
 }
 
 const loginFormSchema = z.object({
-  username: z.string(),
-  password: z.string(),
+  username: z
+    .string()
+    .min(1, { message: 'Este campo precisa ser preenchido' })
+    .email('Este campo precisa ser uma email')
+    .min(5, { message: 'Minimo de 5 caracters' }),
+  password: z.string().min(5, { message: 'Minimo de 5 caracters' }),
 })
 
 type LoginFormInpus = z.infer<typeof loginFormSchema>
 
 const Login = () => {
   const { fetchUser } = useContext(AuthContext)
-  const { register, handleSubmit, reset } = useForm<LoginFormInpus>()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<LoginFormInpus>({
+    resolver: zodResolver(loginFormSchema),
+  })
 
   const navigate = useNavigate()
 
@@ -54,23 +66,29 @@ const Login = () => {
             <span className='text-sm'>Obrigado pela confiança!</span>
           </div>
           <div>
-            <label>Username</label>
+            <label>Email</label>
             <input
               {...register('username')}
               type='text'
               className='bg-zinc-900 rounded-md border border-gray-600 p-2 mt-2 font-semibold 
                         w-full outline-none focus:border-purple-400 transition-all'
             />
+            {errors.username && (
+              <small className='text-red-500'>{errors.username.message}</small>
+            )}
           </div>
           <br />
           <div>
-            <label>Password</label>
+            <label>Senha</label>
             <input
               {...register('password')}
               type='password'
               className='bg-zinc-900 rounded-md border border-gray-600 p-2 mt-2 font-semibold 
                         w-full outline-none focus:border-purple-400 transition-all'
             />
+            {errors.password && (
+              <small className='text-red-500'>{errors.password.message}</small>
+            )}
           </div>
 
           <br />
