@@ -27,7 +27,7 @@ Plataforma de _Blog_ usando reactjs + typescript. Com TailwindCSS para gerar mai
 - [x] Listagem de comentários por postagens
 - [x] Validaçao de campos de formulário
 - [x] Rotas seguras
-- [ ] S
+- [ ] Loading Skeleton
 
 #### Dependências
 
@@ -36,8 +36,8 @@ Plataforma de _Blog_ usando reactjs + typescript. Com TailwindCSS para gerar mai
 - _axios_: Conexão com DB
 - _radix-ui_: componentes HTML sem estilização e mais acessibilidade
 - _react-router-dom_: Rotas da aplicação
-- _react-hook-form_: Gerencimaneto de formulários
-- _zod_: Tipagem de formulário
+- _react-hook-form_: Gerencimaneto/validação de formulários
+- _zod_: Tipagem/validação de formulário (typescript first)
 - _date-fns_: Converter datas
 - _phosphor-react_: Icones
 
