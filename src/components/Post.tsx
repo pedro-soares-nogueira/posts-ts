@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react'
 import Avatar from './Avatar'
-import { format, formatDistanceToNow } from 'date-fns'
+import { format, formatDistanceToNow, parseISO } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR'
 import { PencilSimpleLine, Trash } from 'phosphor-react'
 import { IPosts, IUser } from '../enum/types'
@@ -26,11 +26,15 @@ const newCommentSchema = z.object({
 
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
-const Post = ({ id, title, content, userId }: IPosts) => {
+const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
   const { createComment, comments, deletePost } = useContext(PostsContext)
   const [user, setUser] = useState<IUser[]>([])
 
   const { register, handleSubmit, reset } = useForm<NewCommnetInputs>()
+
+  const publishedDateFormatted = format(parseISO(createdAt), "d 'de' LLLL", {
+    locale: ptBR,
+  })
 
   useEffect(() => {
     fetch(`http://localhost:3000/users?id=${userId}`)
@@ -78,6 +82,8 @@ const Post = ({ id, title, content, userId }: IPosts) => {
           )
         })}
         <div className='flex items-center justify-center gap-3'>
+          <span className='text-xs'>{publishedDateFormatted}</span>
+
           <Dialog.Root>
             <Dialog.Trigger>
               <PencilSimpleLine
@@ -170,14 +176,7 @@ const Post = ({ id, title, content, userId }: IPosts) => {
       </form>
 
       {filteredComments?.map((comment) => {
-        return (
-          <Comment
-            key={comment.id}
-            id={comment.id}
-            content={comment.content}
-            userId={comment.userId}
-          />
-        )
+        return <Comment key={comment.id} {...comment} />
       })}
     </article>
   )

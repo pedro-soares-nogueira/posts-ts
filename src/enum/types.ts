@@ -3,6 +3,7 @@ export interface IPosts {
   title: string
   content: string
   userId: number
+  createdAt: string
 }
 export interface IComments {
   id: number
