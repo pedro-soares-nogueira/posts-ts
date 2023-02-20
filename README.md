@@ -27,7 +27,7 @@ Plataforma de _Blog_ usando reactjs + typescript. Com TailwindCSS para gerar mai
 - [x] Listagem de comentários por postagens
 - [x] Validaçao de campos de formulário
 - [x] Rotas seguras
-- [ ] Loading Skeleton
+- [x] Loading Skeleton
 
 #### Dependências
 
