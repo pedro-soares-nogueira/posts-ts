@@ -3,15 +3,15 @@
     {
       "id": 1,
       "name": "Pedro Soares",
-      "username": "ngrpedro",
-      "password": "123",
+      "username": "ngrpedro@gmail.com",
+      "password": "123456",
       "avatarUrl": "https://github.com/ngrpedro.png",
       "role": "CEO WayneCorp"
     },
     {
       "name": "Mayk Brito",
-      "username": "maykbrito",
-      "password": "456",
+      "username": "maykbrito@gmail.com",
+      "password": "123456",
       "id": 2,
       "avatarUrl": "https://github.com/maykbrito.png",
       "role": "Tech Lead"

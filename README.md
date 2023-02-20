@@ -25,8 +25,9 @@ Plataforma de _Blog_ usando reactjs + typescript. Com TailwindCSS para gerar mai
 - [x] Somente login de usuário cadastrado
 - [x] Listagem de postagens
 - [x] Listagem de comentários por postagens
-- [ ] Validaçao de campos de formulário
-- [ ] Rotas seguras
+- [x] Validaçao de campos de formulário
+- [x] Rotas seguras
+- [ ] S
 
 #### Dependências
 

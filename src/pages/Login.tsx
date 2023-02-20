@@ -67,7 +67,7 @@ const Login = () => {
             <label>Password</label>
             <input
               {...register('password')}
-              type='text'
+              type='password'
               className='bg-zinc-900 rounded-md border border-gray-600 p-2 mt-2 font-semibold 
                         w-full outline-none focus:border-green-400 transition-all'
             />
