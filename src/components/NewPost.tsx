@@ -52,7 +52,6 @@ const NewPost = ({ id, title, content, userId }: Posts) => {
         content,
         userId,
       })
-      reset()
     }
     reset()
   }
