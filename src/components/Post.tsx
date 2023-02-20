@@ -67,7 +67,7 @@ const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
           return (
             <div
               key={user.name}
-              className='flex items-center justify-start gap-6'
+              className='flex flex-col md:flex-row items-center justify-start gap-6'
             >
               <Avatar src={user.avatarUrl} />
               <div className='flex flex-col items-start justify-center'>
@@ -81,66 +81,73 @@ const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
             </div>
           )
         })}
-        <div className='flex items-center justify-center gap-3'>
+        <div className='flex flex-col md:flex-row items-center justify-center gap-3'>
           <span className='text-xs'>{publishedDateFormatted}</span>
 
-          <Dialog.Root>
-            <Dialog.Trigger>
-              <PencilSimpleLine
-                size={22}
-                className='text-gray-200 hover:text-purple-400 transition-all cursor-pointer'
+          <div className='flex items-center justify-center gap-3'>
+            <Dialog.Root>
+              <Dialog.Trigger>
+                <PencilSimpleLine
+                  size={22}
+                  className='text-gray-200 hover:text-purple-400 transition-all cursor-pointer'
+                />
+              </Dialog.Trigger>
+
+              <NewPost
+                id={id}
+                title={title}
+                content={content}
+                userId={userId}
               />
-            </Dialog.Trigger>
+            </Dialog.Root>
 
-            <NewPost id={id} title={title} content={content} userId={userId} />
-          </Dialog.Root>
+            <AlertDialog.Root>
+              <AlertDialog.Trigger asChild>
+                <Trash
+                  size={22}
+                  className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
+                />
+              </AlertDialog.Trigger>
+              <AlertDialog.Portal>
+                <AlertDialog.Overlay className='fixed w-screen h-screen inset-0 bg-black opacity-70' />
+                <AlertDialog.Content
+                  className='bg-zinc-800 p-4 rounded-md flex flex-col items-start justify-center gap-10'
+                  style={{
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <div>
+                    <AlertDialog.Title>Excluir postagem</AlertDialog.Title>
+                    <AlertDialog.Description className='text-2xl font-bold'>
+                      Deseja Excluir a postagem?
+                    </AlertDialog.Description>
+                  </div>
 
-          <AlertDialog.Root>
-            <AlertDialog.Trigger asChild>
-              <Trash
-                size={22}
-                className='text-gray-200 hover:text-red-400 transition-all cursor-pointer'
-              />
-            </AlertDialog.Trigger>
-            <AlertDialog.Portal>
-              <AlertDialog.Overlay className='fixed w-screen h-screen inset-0 bg-black opacity-70' />
-              <AlertDialog.Content
-                className='bg-zinc-800 p-4 rounded-md flex flex-col items-start justify-center gap-10'
-                style={{
-                  position: 'fixed',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                }}
-              >
-                <div>
-                  <AlertDialog.Title>Excluir postagem</AlertDialog.Title>
-                  <AlertDialog.Description className='text-2xl font-bold'>
-                    Deseja Excluir a postagem?
-                  </AlertDialog.Description>
-                </div>
-
-                <div className='w-full flex items-start justify-start gap-4'>
-                  <AlertDialog.Cancel
-                    className='py-3 px-4 flex items-center justify-center gap-2 font-bold text-purple-400 
+                  <div className='w-full flex items-start justify-start gap-4'>
+                    <AlertDialog.Cancel
+                      className='py-3 px-4 flex items-center justify-center gap-2 font-bold text-purple-400 
                    rounded-lg transition-all hover:text-white'
-                  >
-                    Sair
-                  </AlertDialog.Cancel>
-                  <AlertDialog.Action asChild>
-                    <button
-                      onClick={() => hadleDeletePost(id)}
-                      title='Alterar comentário'
-                      className='py-3 px-4 rounded-lg font-bold bg-purple-700 text-white hover:bg-purple-600 
-                                  transition-all disabled:opacity-25'
                     >
-                      Excluir
-                    </button>
-                  </AlertDialog.Action>
-                </div>
-              </AlertDialog.Content>
-            </AlertDialog.Portal>
-          </AlertDialog.Root>
+                      Sair
+                    </AlertDialog.Cancel>
+                    <AlertDialog.Action asChild>
+                      <button
+                        onClick={() => hadleDeletePost(id)}
+                        title='Alterar comentário'
+                        className='py-3 px-4 rounded-lg font-bold bg-purple-700 text-white hover:bg-purple-600 
+                                  transition-all disabled:opacity-25'
+                      >
+                        Excluir
+                      </button>
+                    </AlertDialog.Action>
+                  </div>
+                </AlertDialog.Content>
+              </AlertDialog.Portal>
+            </AlertDialog.Root>
+          </div>
         </div>
       </div>
 

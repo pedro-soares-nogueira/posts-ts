@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <div className='bg-zinc-800 py-3 border-b border-gray-700'>
-      <div className='flex items-center justify-between max-w-[1100px] m-auto'>
+      <div className='flex items-center justify-between max-w-[1100px] m-auto mx-4'>
         <div></div>
         <div className='flex items-center justify-between gap-3'>
           <h1 className='font-bold text-2xl bg-zinc-800 text-purple-400'>Pedro | BlogFeed</h1>

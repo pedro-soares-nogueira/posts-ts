@@ -84,8 +84,10 @@ const Login = () => {
               Entrar
             </button>
 
-            <Link to='/register' className='flex gap-2 items'>
-              Não tenho cadastro. Registrar <ArrowRight size={22} />
+            <Link to='/register' className='flex gap-2 text-sm'>
+              Não tenho cadastro.{' '}
+              <span className='text-purple-400'>Registrar</span>{' '}
+              <ArrowRight size={18} className='mt-[1px]' />
             </Link>
           </div>
         </form>

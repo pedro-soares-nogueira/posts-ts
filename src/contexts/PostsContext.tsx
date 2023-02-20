@@ -122,6 +122,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
     const response = await api.put(`posts/${id}`, {
       title,
       content,
+      createdAt: new Date(),
       userId,
     })
 

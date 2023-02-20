@@ -40,6 +40,7 @@ Plataforma de _Blog_ usando reactjs + typescript. Com TailwindCSS para gerar mai
 - _zod_: Tipagem/validação de formulário (typescript first)
 - _date-fns_: Converter datas
 - _phosphor-react_: Icones
+- _react-loading-skeleton_: Loading Skeleton para melhorar a experiencia do usuário
 
 ---
 

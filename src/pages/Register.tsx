@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowLeft } from 'phosphor-react'
 
 const newUserFormSchema = z.object({
   name: z.string().min(2, { message: 'Minimo de 2 caracters' }),
@@ -138,8 +139,9 @@ const Register = () => {
               Registrar
             </button>
 
-            <Link to='/' className='flex gap-2 items'>
-              Voltar e logar
+            <Link to='/' className='flex gap-2 text-sm'>
+              <ArrowLeft size={18} className='mt-[1px]' />
+              <span className='text-purple-400'>Voltar e logar</span>
             </Link>
           </div>
         </form>
