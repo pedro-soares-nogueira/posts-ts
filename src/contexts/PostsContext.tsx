@@ -55,8 +55,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
     userId = user[0].id
   }
 
-  console.log(user)
-
   const fetchPosts = async () => {
     const response = await api.get('posts', {
       params: {

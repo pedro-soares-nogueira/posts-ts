@@ -9,7 +9,6 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useContext(AuthContext)
-  console.log(user)
 
   if (user.length === 0) {
     return <Navigate to='/' />

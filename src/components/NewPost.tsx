@@ -106,7 +106,7 @@ const NewPost = ({ id, title, content, userId }: Posts) => {
               type='submit'
               title=''
               className='py-3 px-4 rounded-lg font-bold bg-green-700 text-white hover:bg-green-600 
-                            transition-all disabled:opacity-25'
+              transition-all disabled:opacity-25'
             >
               {isNewPost ? 'Publicar' : 'Editar'}
             </button>
