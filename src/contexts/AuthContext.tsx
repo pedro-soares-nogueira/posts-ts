@@ -1,8 +1,5 @@
 import { createContext, ReactNode } from 'react'
-import { useState, useEffect } from 'react'
 import { api } from './../lib/axios'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from './../hooks/useLocalstorage'
 
 interface User {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { PostsContext } from '../contexts/PostsContext'
 import * as z from 'zod'

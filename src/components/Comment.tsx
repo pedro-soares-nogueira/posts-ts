@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { PostsContext } from '../contexts/PostsContext'
 import EditComment from './EditComment'
 import * as Dialog from '@radix-ui/react-dialog'
 import { PencilSimpleLine, Trash } from 'phosphor-react'
-import { IUser } from '../enum/types'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR'
 

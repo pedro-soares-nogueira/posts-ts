@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import React from 'react'
 import Login from '../pages/Login'
 import Feed from '../pages/Feed'
 import Register from '../pages/Register'

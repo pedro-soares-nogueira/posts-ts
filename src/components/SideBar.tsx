@@ -1,11 +1,6 @@
-import { Pen } from 'phosphor-react'
-import { useEffect } from 'react'
 import Avatar from './Avatar'
 import { useContext } from 'react'
-import { PostsContext } from './../contexts/PostsContext'
 import { AuthContext } from './../contexts/AuthContext'
-import { useState } from 'react'
-import { api } from '../lib/axios'
 
 interface UserProps {
   id: number

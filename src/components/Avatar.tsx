@@ -1,4 +1,4 @@
-import React, { ImgHTMLAttributes } from 'react'
+import { ImgHTMLAttributes } from 'react'
 import * as RadixAvatar from '@radix-ui/react-avatar'
 import { User } from 'phosphor-react'
 

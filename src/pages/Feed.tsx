@@ -2,7 +2,6 @@ import Header from '../components/Header'
 import Post from '../components/Post'
 import SideBar from '../components/SideBar'
 import { useContext } from 'react'
-import { useForm } from 'react-hook-form'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { PostsContext } from './../contexts/PostsContext'

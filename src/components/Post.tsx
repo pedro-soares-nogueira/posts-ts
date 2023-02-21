@@ -1,12 +1,6 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Avatar from './Avatar'
-import { format, formatDistanceToNow, parseISO } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR'
 import { PencilSimpleLine, Trash } from 'phosphor-react'
 import { IPosts, IUser } from '../enum/types'
@@ -15,7 +9,6 @@ import * as z from 'zod'
 import { PostsContext } from '../contexts/PostsContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import NewPost from './NewPost'
-import EditComment from './EditComment'
 import Comment from './Comment'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 
