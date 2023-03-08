@@ -45,6 +45,13 @@
       "createdAt": "2023-02-19T13:11:09.226Z",
       "userId": 3,
       "id": 3
+    },
+    {
+      "title": "teste",
+      "content": "testando performance",
+      "createdAt": "2023-03-06T17:52:35.179Z",
+      "userId": 1,
+      "id": 4
     }
   ],
   "comments": [

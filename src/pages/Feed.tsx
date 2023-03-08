@@ -1,24 +1,28 @@
 import Header from '../components/Header'
 import Post from '../components/Post'
 import SideBar from '../components/SideBar'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-
-import { PostsContext } from './../contexts/PostsContext'
+import { useAppDispatch, useAppSelector } from '../hooks/useReducer'
 import NewPost from '../components/NewPost'
-
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { postActios } from '../reducers/postsSlice'
 
 const Feed = () => {
-  const { posts } = useContext(PostsContext)
+  const { posts, loading } = useAppSelector((state) => state.posts)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(postActios.fetchPosts())
+  }, [])
 
   return (
     <>
       <Header />
 
       <div className='max-w-[1000px] mx-4 lg:m-auto mt-8 lg:mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 '>
-        {posts.length === 0 && (
+        {loading && (
           <SkeletonTheme baseColor='#202020' highlightColor='#444'>
             <div className='flex flex-col gap-4'>
               <Skeleton height={400} />

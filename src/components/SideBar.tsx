@@ -1,6 +1,10 @@
 import Avatar from './Avatar'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from './../contexts/AuthContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { postActios } from '../reducers/postsSlice'
+import { AppDispatch, RootState } from '../reducers/store'
+import { useAppDispatch, useAppSelector } from '../hooks/useReducer'
 
 interface UserProps {
   id: number
