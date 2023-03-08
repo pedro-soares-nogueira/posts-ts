@@ -7,7 +7,6 @@ import { AuthContext } from './AuthContext'
 interface PostsContextType {
   posts: IPosts[]
   comments: IComments[]
-  createPost: (data: CreatePostInput) => Promise<void>
   createComment: (data: CreateCommentInput) => Promise<void>
   deleteComment: (id: number) => Promise<void>
   deletePost: (id: number) => Promise<void>
@@ -55,30 +54,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
     userId = user[0].id
   }
 
-  const fetchPosts = async () => {
-    const response = await api.get('posts', {
-      params: {
-        _sort: 'createdAt',
-        _order: 'desc',
-      },
-    })
-
-    setPosts(response.data)
-  }
-
-  const createPost = async (data: CreatePostInput) => {
-    const { content, title } = data
-
-    const response = await api.post('posts', {
-      title,
-      content,
-      createdAt: new Date(),
-      userId,
-    })
-
-    setPosts((state) => [response.data, ...posts])
-  }
-
   const fetchComments = async () => {
     const response = await api.get('comments')
 
@@ -115,6 +90,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
     const postWithoutDeletedOne = posts.filter((post) => {
       return post.id !== id
     })
+
     setPosts(postWithoutDeletedOne)
   }
 
@@ -146,7 +122,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
   }
 
   useEffect(() => {
-    fetchPosts()
     fetchComments()
   }, [])
 
@@ -155,7 +130,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
       value={{
         posts,
         comments,
-        createPost,
         createComment,
         deleteComment,
         deletePost,

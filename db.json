@@ -52,6 +52,48 @@
       "createdAt": "2023-03-06T17:52:35.179Z",
       "userId": 1,
       "id": 4
+    },
+    {
+      "title": "dasdasdasda",
+      "content": "asdasdasdasdsss",
+      "createdAt": "2023-03-08T16:16:59.134Z",
+      "id": 5
+    },
+    {
+      "title": "sdadasd",
+      "content": "asdasdasd",
+      "createdAt": "2023-03-08T16:17:49.435Z",
+      "id": 6
+    },
+    {
+      "title": "dfsdf",
+      "content": "sdfsdfsdfsdf",
+      "createdAt": "2023-03-08T16:19:06.369Z",
+      "id": 7
+    },
+    {
+      "title": "teste redux",
+      "content": "testando redux async thunk ",
+      "createdAt": "2023-03-08T16:19:31.228Z",
+      "id": 8
+    },
+    {
+      "title": "About Redux oldstate",
+      "content": "state.posts = [action.payload, ...state.posts]",
+      "createdAt": "2023-03-08T16:22:52.566Z",
+      "id": 9
+    },
+    {
+      "title": "sdfsdfsd",
+      "content": "fsdfsdfsdfsdf",
+      "createdAt": "2023-03-08T16:31:45.500Z",
+      "id": 10
+    },
+    {
+      "title": "teste",
+      "content": "testee",
+      "createdAt": "2023-03-08T16:31:52.147Z",
+      "id": 11
     }
   ],
   "comments": [

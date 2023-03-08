@@ -4,6 +4,10 @@ import { PostsContext } from '../contexts/PostsContext'
 import * as z from 'zod'
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
+import { useAppSelector } from '../hooks/useReducer'
+import { useAppDispatch } from './../hooks/useReducer'
+import { postActios } from '../reducers/postsSlice'
+import { AuthContext } from './../contexts/AuthContext'
 
 interface Posts {
   id?: number
@@ -22,7 +26,15 @@ type NewPostFormInputs = z.infer<typeof newPostFormSchema>
 
 const NewPost = ({ id, title, content, userId }: Posts) => {
   const postId = id
-  const { createPost, editPost } = useContext(PostsContext)
+  const { editPost } = useContext(PostsContext)
+  const { user } = useContext(AuthContext)
+
+  let newPostUserId: number
+  if (user.length !== 0) {
+    newPostUserId = user[0].id
+  }
+
+  const dispatch = useAppDispatch()
 
   const isNewPost = id === undefined
 
@@ -37,10 +49,13 @@ const NewPost = ({ id, title, content, userId }: Posts) => {
     const { content, title } = data
 
     if (isNewPost) {
-      await createPost({
-        title,
-        content,
-      })
+      await dispatch(
+        postActios.createPost({
+          title,
+          content,
+          userId: newPostUserId,
+        })
+      )
     } else {
       if (!postId) {
         throw new Error('Ops, no postId!')
