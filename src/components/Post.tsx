@@ -11,6 +11,8 @@ import * as Dialog from '@radix-ui/react-dialog'
 import NewPost from './NewPost'
 import Comment from './Comment'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
+import { useAppDispatch } from '../hooks/useReducer'
+import { postActios } from '../reducers/postsSlice'
 
 const newCommentSchema = z.object({
   id: z.number(),
@@ -20,8 +22,9 @@ const newCommentSchema = z.object({
 type NewCommnetInputs = z.infer<typeof newCommentSchema>
 
 const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
-  const { createComment, comments, deletePost } = useContext(PostsContext)
+  const { createComment, comments } = useContext(PostsContext)
   const [user, setUser] = useState<IUser[]>([])
+  const dispatch = useAppDispatch()
 
   const { register, handleSubmit, reset } = useForm<NewCommnetInputs>()
 
@@ -50,7 +53,7 @@ const Post = ({ id, title, content, userId, createdAt }: IPosts) => {
   const filteredComments = comments.filter((comment) => comment.postId === id)
 
   const hadleDeletePost = (id: number) => {
-    deletePost(id)
+    dispatch(postActios.deletePost(id))
   }
 
   return (

@@ -9,8 +9,6 @@ interface PostsContextType {
   comments: IComments[]
   createComment: (data: CreateCommentInput) => Promise<void>
   deleteComment: (id: number) => Promise<void>
-  deletePost: (id: number) => Promise<void>
-  editPost: (data: EditPostInput) => Promise<void>
   editComment: (data: EditCommentInput) => Promise<void>
 }
 
@@ -84,31 +82,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
     setComments(commentWithoutDeletedOne)
   }
 
-  const deletePost = async (id: number) => {
-    const response = await api.delete(`posts/${id}`)
-
-    const postWithoutDeletedOne = posts.filter((post) => {
-      return post.id !== id
-    })
-
-    setPosts(postWithoutDeletedOne)
-  }
-
-  const editPost = async ({ id, title, content }: EditPostInput) => {
-    const response = await api.put(`posts/${id}`, {
-      title,
-      content,
-      createdAt: new Date(),
-      userId,
-    })
-
-    const newArray = posts.filter((post) => {
-      return post.id !== id
-    })
-
-    setPosts((state) => [response.data, ...newArray])
-  }
-
   const editComment = async ({ id, content }: EditCommentInput) => {
     const response = await api.patch(`comments/${id}`, {
       content,
@@ -132,8 +105,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
         comments,
         createComment,
         deleteComment,
-        deletePost,
-        editPost,
         editComment,
       }}
     >
